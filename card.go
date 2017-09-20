@@ -5,25 +5,23 @@ import (
 	"math/bits"
 )
 
+// "♣" "♦" "♥" "♠"
+// Individual cards are represented by a uint32 with the following bit meanings
+// bits 31,32: num_A
+// bits 29,30: num_K
+// bits 27,28: num_Q
+// ...
+// bits 6,7 num_2
+// bits 4,5: spare
+// bit 3: spades
+// bit 2: hearts
+// bit 1: diamonds
+// bit 0: clubs
 type Card uint32
-//type Card = uint32
 
-//struct card{
-//	unsigned num_A:2;
-//	unsigned num_K:2;
-//	unsigned num_Q:2;
-//	//....
-//	unsigned num_2:2;
-//	unsigned spare:2;
-//	unsigned spade:1;
-//	unsigned heart:1;
-//	unsigned diamond:1;
-//	unsigned club:1;
-//};
 
-// Creates a single card from an integer.
-// Useful for running in a loop to create a deck.
-// i.e. 0 ==> 2 of Clubs, ...,  51 ==> Ace of Spades
+// Creates a single card from an integer. Useful for running in a loop to
+// create a deck. i.e. 0 ==> 2 of Clubs, ...,  51 ==> Ace of Spades
 func MakeCard(i int) Card {
 	// Handle bad i values gracefully
 	var ui uint32
@@ -39,7 +37,6 @@ func MakeCard(i int) Card {
 
 // Gets a simple text representation of a playing card
 func (card Card) Text() string {
-
 	b := ""
 	val := bits.TrailingZeros32(uint32(card)>>6) / 2 + 2
 
@@ -66,10 +63,6 @@ func (card Card) Text() string {
 	} else if card&8 == 8 {
 		b += "S"
 	}
-	//b += "♣"
-	//b += "♦"
-	//b += "♥"
-	//b += "♠"
 
 	return b
 }
