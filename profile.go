@@ -24,6 +24,7 @@ func Profile() {
 
 	start := time.Now().UTC().UnixNano()
 
+	// Loop through all possible hand combinations
 	for ; c1 < c2; c1++ {
 		for c2 = c1+1; c2 < c3; c2++ {
 			for c3 = c2+1; c3 < c4; c3++ {
